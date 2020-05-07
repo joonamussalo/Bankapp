@@ -26,7 +26,8 @@ public class activity_Addmoney extends AppCompatActivity {
 
     }
 
-
+    // add money nappi ottaa syötteenä käyttäjän antaman rahamäärän ja lisää sen vanhaan rahamäärään.
+    //rahan lisäys tapahtuma lisätään myös historia tiedostoon.
     public void addMoney(View v) {
         Intent intent = getIntent();
         Integer id = intent.getIntExtra("ID",0);

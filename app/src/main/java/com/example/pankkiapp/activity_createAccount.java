@@ -28,6 +28,8 @@ public class activity_createAccount extends AppCompatActivity {
         textView = (TextView)findViewById(R.id.textView);
         db=new DatabaseHelper(this);
 
+        //create account luo random tilinumeron tilille ja kysyy käyttäjältä tilin nimen. tili
+        //lisätään databaseen.
 
     }
     public void createAccount(View v) {

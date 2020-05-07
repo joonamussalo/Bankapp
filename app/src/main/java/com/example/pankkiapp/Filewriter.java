@@ -33,7 +33,7 @@ public class Filewriter {
 
 
 
-            ows.write(s);
+            ows.write(s+"\n");
             ows.close();
 
 

@@ -30,7 +30,7 @@ public class activity_home extends AppCompatActivity {
 
 
     }
-
+    //avaa changedetails activityn
     public void changeDetails(View v) {
         Intent homeintent = getIntent();
         Integer id = homeintent.getIntExtra("ID",0);
@@ -38,7 +38,7 @@ public class activity_home extends AppCompatActivity {
         intent.putExtra("ID",id);
         startActivity(intent);
     }
-
+    //avaa uuden tilin luomisactivityn
     public void createAccount(View v) {
         Intent homeintent = getIntent();
         Intent intent = new Intent(activity_home.this,activity_createAccount.class);
@@ -46,6 +46,8 @@ public class activity_home extends AppCompatActivity {
         intent.putExtra("ID",id);
         startActivity(intent);
     }
+
+    //update accounts hakee databasesta tilit ja laittaa ne spinneriin.
 
     public void updateAccounts(View v) {
         Intent homeintent= getIntent();
@@ -57,7 +59,7 @@ public class activity_home extends AppCompatActivity {
 
     }
 
-
+    //avaa valitun tilin spinneristä
     public void gotoAccount(View v) {
         Intent homeintent = getIntent();
         Integer id =  homeintent.getIntExtra("ID",0);

@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         login = (Button) findViewById(R.id.login);
         register = (Button) findViewById(R.id.register);
+        //  register nappi avaa rekisteröinti ikkunan
         register.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent registerIntent = new Intent(MainActivity.this, activity_register.class);
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+        // login nappi kirjautuu sisään tarkistamalla ensin databasesta löytyykö vastaava username,password yhdistelmä
         login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

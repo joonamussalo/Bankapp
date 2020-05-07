@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME="taneli.db";
+    public static final String DATABASE_NAME="bankappdb.db";
     public static final String TABLE_NAME="users";
     public static final String TABLE_NAME2="accounts";
     public static final String TABLE_NAME3="cards";
@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME,null,1);
     }
-
+// luodaan tarvittavat tablet;käyttäjät, tilit ja kortit
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String sql ="CREATE TABLE users (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT,password TEXT,email TEXT)";
         String sql2="CREATE TABLE accounts (accountID INTEGER PRIMARY KEY AUTOINCREMENT, ID INTEGER, accountname TEXT, accountnumber TEXT, money DOUBLE, FOREIGN KEY(ID)REFERENCES users(ID))";
@@ -40,6 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE_NAME3);
         onCreate(sqLiteDatabase);
     }
+    // lisätään käyttäjä databaseen.
     public void addUser(Käyttäjä käyttäjä) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues= new ContentValues();
@@ -49,12 +50,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long res = db.insert("users",null, contentValues);
         db.close();
     }
-
+    // päivitetään rahamäärä databaseen
     public void updateMoney(int id, String accname, double money) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sql= "UPDATE "+TABLE_NAME2+" SET money ="+money+" WHERE ID =" +id+" AND accountname ='" +accname+"';";
         db.execSQL(sql);
     }
+    // päivitetään käyttäjän tiedot.
 
     public void updateUser(int id, Käyttäjä käyttäjä) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -62,13 +64,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String sql= "UPDATE "+TABLE_NAME+" SET name ='"+käyttäjä.getName()+"', password ='"+käyttäjä.getPassword()+"', email ='"+käyttäjä.getEmail()+"' WHERE ID =" +id+";";
         db.execSQL(sql);
     }
-
+    // päivitetään tilin nimi
     public void updateAccount(int id, Tili tili) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         String sql = "UPDATE "+TABLE_NAME2+" SET accountname ='"+tili.getAccountname()+"' WHERE accountID =" +id+";";
         db.execSQL(sql);
     }
+    // haetaan databasesta user id
 
     public int getUserID(String user) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -81,6 +84,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
       return userID;
     }
 
+    //haetaan account id nimen ja käyttäjän idn avulla.
+
     public int getAccountID(String accname, int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String sql =" SELECT accountID FROM " + TABLE_NAME2+" WHERE ID =" +id+" AND accountname ='" +accname+"';";
@@ -92,15 +97,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return accountID;
     }
 
-    public String getAccountname(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String sql =" SELECT accountname FROM " + TABLE_NAME2+" WHERE ID =" +id+";";
-        Cursor res = db.rawQuery(sql,null);
-        res.moveToFirst();
-        String name= res.getString(0);
 
-        return name;
-    }
+    // hakee tilin rahamäärän databasesta käyttäjä idn ja tilinnimen avulla
 
     public double getAccountmoney(int id, String accname) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -113,7 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return money;
     }
 
-
+    //lisää tili-objektin databaseen
 
     public void addAccount(Tili account) {
 
@@ -127,6 +125,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
     }
+    //lisää debitkortin databaseen
 
     public void addDebitCard(DebitKortti debitkortti) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -140,6 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long res = db.insert("cards",null,contentValues);
 
     }
+    // lisää creditkortin databaseen
 
     public void addCreditCard(CreditKortti creditKortti) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -154,7 +154,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
+    // hakee tilit databasesta ja lisää ne listaan. haku käyttäjän idn avulla.
     public  ArrayList<String> getAccounts(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -175,6 +175,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
     }
+    //hakee kortit databasesta ja lisää listaan. haku account idn avulla.
 
     public  ArrayList<String> getCards(int accountid) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -197,7 +198,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-
+    //tarkastaa löytyykö käyttäjää databasesta.
     public boolean userCheck(String name, String pass) {
         String[] columns = {COL_1};
         SQLiteDatabase db = getReadableDatabase();

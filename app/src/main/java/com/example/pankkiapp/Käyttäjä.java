@@ -1,8 +1,13 @@
 package com.example.pankkiapp;
 
+import com.github.cliftonlabs.json_simple.JsonObject;
+import com.github.cliftonlabs.json_simple.Jsonable;
+
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 
-public class Käyttäjä {
+public class Käyttäjä implements Jsonable {
     String name;
     String password;
     String email;
@@ -54,5 +59,24 @@ public class Käyttäjä {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toJson() {
+        JsonObject json = new JsonObject();
+        json.put("name", this.name);
+        json.put("password", this.password);
+        json.put("email", this.email);
+        return json.toJson();
+
+    }
+
+    @Override
+    public void toJson(Writer writable) throws IOException {
+        try {
+            writable.write(this.toJson());
+        } catch (Exception ignored) {
+        }
+
     }
 }

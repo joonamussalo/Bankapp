@@ -31,6 +31,7 @@ public class activity_accountView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_view);
 
+
         button1 = (Button)findViewById(R.id.button1);
         button2 = (Button)findViewById(R.id.button2);
         button3 = (Button)findViewById(R.id.button3);
@@ -45,6 +46,8 @@ public class activity_accountView extends AppCompatActivity {
         String accountname = intent.getStringExtra("accountname");
         db=new DatabaseHelper(this);
 
+        //haetaan databasesta tilin rahamäärä
+
         double money = db.getAccountmoney(id,accountname);
         String money2 = String.valueOf(money);
         textView.setText(accountname);
@@ -53,6 +56,7 @@ public class activity_accountView extends AppCompatActivity {
 
 
     }
+    //add money nappi avaa rahanlisäys näkymän
 
     public void addMoney(View v) {
         Intent intent = getIntent();
@@ -63,7 +67,7 @@ public class activity_accountView extends AppCompatActivity {
         moneyintent.putExtra("accountname", accountname);
         startActivity(moneyintent);
     }
-
+    //addcard nappi avaa kortin lisäys näkymän
     public void addCard(View v) {
         Intent intent = getIntent();
         Integer id = intent.getIntExtra("ID",0);
@@ -73,7 +77,7 @@ public class activity_accountView extends AppCompatActivity {
         cardintent.putExtra("accountname", accountname);
         startActivity(cardintent);
     }
-
+    // change details napilla voi vaihtaa tilin tietoja
     public void changeDetails(View v) {
         Intent intent = getIntent();
         Integer id = intent.getIntExtra("ID",0);

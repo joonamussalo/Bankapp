@@ -24,6 +24,8 @@ public class activity_changeAccountDetails extends AppCompatActivity {
         button = (Button)findViewById(R.id.button);
     }
 
+    // changeDetails vaihtaa tilin nimen.
+
     public void changeDetails(View v) {
         Intent intent = getIntent();
         Integer id = intent.getIntExtra("ID",0);

@@ -33,7 +33,7 @@ public class activity_changeDetails extends AppCompatActivity {
         confpass= (EditText)findViewById(R.id.confpass);
         db = new DatabaseHelper(this);
     }
-
+    //changedetails metodilla voidaan asettaa uusi käyttäjänimi, salasana ja email osoite käyttäjälle. tiedot päivitetään databaseen.
     public void changeDetails(View v) {
         Intent intent = getIntent();
         Integer id = intent.getIntExtra("ID",0);

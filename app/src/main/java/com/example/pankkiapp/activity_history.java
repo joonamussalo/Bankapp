@@ -38,10 +38,10 @@ public class activity_history extends AppCompatActivity {
         String accountname = intent.getStringExtra("accountname");
         Integer nimi = db.getAccountID(accountname,id);
         String filename = nimi.toString();
-
+        // valitun tilin historia tulostetaan puhelimen näytölle.
         try {
 
-            InputStream ins=context.openFileInput(filename); //TODO tälle arvo
+            InputStream ins=context.openFileInput(filename);
             BufferedReader br = new BufferedReader(new InputStreamReader(ins));
             String s ="";
             String tiedosto="";
@@ -49,8 +49,6 @@ public class activity_history extends AppCompatActivity {
             while ((s=br.readLine())!=null) {
 
                 tiedosto = tiedosto+s;
-
-
 
 
             };
@@ -65,6 +63,8 @@ public class activity_history extends AppCompatActivity {
         }
 
     }
+
+    //go bcak vie käyttäjän takaisin edelliseen näkymään.
 
     public void goBack(View v) {
         Intent intent = getIntent();

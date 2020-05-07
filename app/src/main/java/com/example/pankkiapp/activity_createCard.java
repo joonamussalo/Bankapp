@@ -53,6 +53,7 @@ public class activity_createCard extends AppCompatActivity {
 
 
     }
+        // tiliä luodessa valitaan debit/credit, asetetaan osto- ja nostorajat, sekä valitaan toiminta-alue.
 
     public void addCard(View v) {
         Intent intent= getIntent();
